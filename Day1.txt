@@ -1,0 +1,42 @@
+Learn Git from LiaoXuefeng:    (# means note here)
+
+Creat Reposity:
+first,Creat a new folder:
+$ mkdir dirname
+$ cd dirname
+second,Change the folder to a repository of Git：
+$ git init
+ls -ah   #there is a folder named .git
+then,create a file under the folder you have turn into a repository,
+and next,hand in the file into repository:
+$ git add filename   #hand into Working Directory
+$ git commit -m "explain"   #hand into Repository
+
+$ git status     #show repository's state
+$ git diff       #show changes
+$ git log        #show each hand in
+$ git reset --hard HEAD^/commit_ID   #back to last version/history version,,HEAD means current version
+$ git reflog     #show history command
+ 
+
+if you want to hand into Repository,you must be sure it has been in Working Directory already.
+
+$ git checkout --file   #abondon the change in Working Directory
+$ git reset HEAD file   #anondon the change in Repository back to Working Direcotory 
+
+Remove file:
+first,
+$ rm filename
+then,
+$ git rm filename   #confirm to delete
+
+Add to Github:
+fitst, login Github ,find "Create a new repo" and fill in the "Repository name",click "Create repository"
+then,
+$ git remote add origin git@github.com:txAnnie/name.git   #connect a repository
+$ git push origin master   #first time:" $ git push -u origin master"
+
+Clone from Github:
+$ git clone git@github.com:txAnnie/name.git
+
+
