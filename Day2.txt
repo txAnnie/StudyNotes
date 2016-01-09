@@ -1,0 +1,49 @@
+basic:
+(#SA:server address,LP：Local path,SP:server path)
+1.Connect to remote server:$ ssh name@SA  
+  Copy file to remote server:$ ssh LA name@SA:SP
+  Copy file to local:$ ssh name@SA:SP LA 
+2.
+a)File size：$ du -sk filename
+  Folder size:$ du -sh dirname 
+  Memory size:$ free
+  Disk size:$ df -h
+  Cpu information:$ cat /proc/cpuinfo
+b)Current process:$ ps -ef
+  Residual memory:$ free -mf
+  Using memory:$ cat /proc/meminfo
+  Kill process:$ kill -s9 number(first,use "$ ps -ef" to check out,then,kill process )
+c)
+1)$ chmod +x processname
+  $ ./processname
+2)$ bash processname
+d)
+If-else:
+eg1:
+#!/bin/bash
+a=10
+b=20
+if [ $a == $b ]
+then
+	echo "a is equal to b"
+elif [ $a -gt $b ]
+then 
+	echo "a is greater than b"
+elif [ $a -lt $b ]
+then
+	echo "a is less than b"
+else
+	echo "None of the condition met"
+fi
+eg2:
+#!/bin/bash
+if test $[2*3] -q $[1+5];then echo 'The two numbers are equal!';fi;
+
+For:
+eg:
+for loop in 1 2 3 4 5
+do 
+   echo "The value is :$loop"
+done
+
+
