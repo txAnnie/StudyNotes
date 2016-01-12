@@ -1,8 +1,8 @@
 basic:
-(#SA:server address,LP：Local path,SP:server path)
+(#SA:server address,LA：Local address,SP:server path)
 1.Connect to remote server:$ ssh name@SA  
-  Copy file to remote server:$ ssh LA name@SA:SP
-  Copy file to local:$ ssh name@SA:SP LA 
+  Copy file to remote server:$ ssp LA name@SA:SP
+  Copy file to local:$ scp name@SA:SP LA 
 2.
 a)File size：$ du -sk filename
   Folder size:$ du -sh dirname 
