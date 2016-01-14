@@ -1,0 +1,1 @@
+awk '{for(i=1;i<=NF;i++) if($i=="test") sum++}END{print sum}' data1

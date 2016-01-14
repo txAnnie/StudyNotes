@@ -1,0 +1,4 @@
+#!/bin/bash
+
+val=`expr2+2`
+echo "Total value:$val"

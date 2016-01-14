@@ -1,0 +1,3 @@
+#! /bin/bash
+myUrl="http://see.xidian.edu.cn/cpp/linux/"
+echo ${myUrl}

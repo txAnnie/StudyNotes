@@ -1,0 +1,1 @@
+awk '{print $0 | "sort -k9"}' data1
