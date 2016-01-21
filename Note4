@@ -1,0 +1,153 @@
+Linux sed
+
+1.替换标记
+$ cat data4
+This is a test of the test script.
+This is the second test of the test script.
+
+$ sed 's/test/trail/' data4
+This is a trail of the test script.
+This is the second trail of the test script.
+
+       's/pattern/replacement/flags'.
+  flags:  数字:替换位置（第几个出现位置，不填则默认首次出现文本）
+          g:替换全部
+          p:和-n sed选项一起使用，只打印替换的行.
+          w file:将替换结果写入文件.
+
+2.替换字符
+$ sed 's!/bin/bash!/bin/bash/csh!' /etc/passwd.
+
+3.使用地址
+1）数字式行寻址
+$ sed '2s/dog/cat/' data1         //指定sed命令将应用的那一行的行号
+The quick brown fox jumps over the lazy dog.
+The quick brown fox jumps over the lazy cat.
+The quick brown fox jumps over the lazy cat.
+The quick brown fox jumps over the lazy dog.
+
+$ '2,4s/dog/cat/' data1           //仅修改指定地址第三行中文本
+The quick brown fox jumps over the lazy dog.
+The quick brown fox jumps over the lazy cat.
+The quick brown fox jumps over the lazy cat.
+The quick brown fox jumps over the lazy cat.
+
+$ '2,$s/dog/cat/' data1           //指定位置到文本结束
+
+2）文本模式筛选
+$ sed '/rich/s/bash/csh/' /etc/passwd
+
+3)组合命令
+$ sed '2{
+>s/fox/elephant/
+>s/cat/dog/
+>}' data1
+The quick brown fox jumps over the lazy dog.
+The quick brown elephant jumps over the lazy dog.
+The quick brown fox jumps over the lazy dog.
+The quick brown fox jumps over the lazy dog.
+
+$ sed '3,${
+>s/brown/green/
+>s/lazy/active/
+>}' data1
+The quick brown fox jumps over the lazy dog.
+The quick brown fox jumps over the lazy cat.
+The quick green fox jumps over the active dog.
+The quick green fox jumps over the active dog.
+
+4.删除行
+$ sed 'd' data1
+
+$ sed '3d' data1
+The quick brown fox jumps over the lazy dog.
+The quick brown fox jumps over the lazy cat.
+The quick brown fox jumps over the lazy dog.
+
+$ sed '2,$d' data1
+The quick brown fox jumps over the lazy dog.
+
+$ sed '/lazy dog/d' data1
+The quick brown fox jumps over the lazy cat.
+
+5.插入和附加文本
+$ echo "testing" |sed 'i\        //在指定行前加一行             a\指定行后加一行
+>This is a test'
+This is a test 
+testing
+
+$ sed '3i\
+>This is a test'                //数据流第3行前加              3a\数据流第3行后加
+
+$ sed '$a\                      //文本末尾加                    1i\文本首加
+
+6.更改行
+$ sed '3c\                      //更改第三行内容                  $ sed '/本行关键字/c\
+>This is a test'                                                   >This is a test'
+
+7.变换命令
+$ echo "This 1 is a test of 1 try." |sed 'y/123/456/'
+This 4 is a test of 4 try.
+
+8.打印命令
+1）打印行
+$ echo "This is a test" |sed 'p'
+This is a test.
+This is a test
+
+$ sed -n '/3/{
+>p
+>s/line/test/p
+>}' data6
+This is line number 3.
+This is test number 3.
+
+2)打印行号
+$ sed '=' data1                                                     $ sed -n '/number 4/{
+1.The quick brown fox jumps over the lazy cat.                      >=
+2.The quick brown fox jumps over the lazy cat.                      >p
+3.The quick brown fox jumps over the lazy cat.                      >}' data6
+4.The quick brown fox jumps over the lazy dog.                      4.This is line number 4.
+
+9.写文件
+$ sed '1,2w test' data6                                             $ sed -n '/cat/w cat2' data4
+$ cat test                                                          $ cat cat2
+This is line number 1.                                              This quick brown fox jumps over the lazy cat.
+This is line number 2.
+
+10.从文件读数据
+$ cat cat2
+This quick brown fox jumps over the lazy cat.
+$ sed '3r cat2' data4
+The quick brown fox jumps over the lazy dog.
+The quick brown fox jumps over the lazy cat.
+The quick brown fox jumps over the lazy dog.
+The quick brown fox jumps over the lazy cat.
+The quick brown fox jumps over the lazy dog.
+
+$ sed '/number 2/r cat2' data6
+$ sed '$r cat2' data6                                              将cat2中内容插入data6末尾
+
+
+
+Linux grep
+
+$ grep linuxtechi /etc/passwd                                     在/etc/passed/中查找含linuxtechi的
+
+$ grep -l linuxtechi /etc/passwd /etc/shadow                      列出包含linuxtechi的文件名
+$ grep -n linuxtechi /etc/passwd /etc/shadow                      显示匹配的行号
+$ grep -v linuxtechi /etc/passwd /etc/shadow                      显示不包含linuxtechi的行
+$ grep ^root linuxtechi /etc/passwd /etc/shadow                   显示以root开头的行
+$ grep bash$ linuxtechi /etc/passwd /etc/shadow                   显示以bash结束的尾
+$ grep -r linuxtechi /etc/                                        在/etc目录中查找”linuxtechi”
+$ grep ^$ /etc/shadow                                             查找空行
+$ grep -i linuxtechi                                              查找含linuxtechi，不区分大小写
+$ grep -e "linuxtechi" -e "root" /etc/passwd                      查找多个单词
+$ grep -c "linuxtechi"                                            匹配到的数量
+$ grep -B4 "games" /etc/passwd                                    匹配行前4行
+$ grep -A4 "games" /etc/passwd                                    匹配行后4行
+$ grep -C "games" /etc/passwd                                     匹配行前后各4行
+$ grep -[A] "games"/etc/passwd                                    匹配单个字符
+$ grep -[A-Z] "games" etc/passwd                                  匹配范围
+$ grep 。"games" /etc/passwd                                      所有单个字符
+$ grep '[a-z]\{5\}' aa                                            显示所有包含每个字符串至少有5个连续小写字符的字符串的行
