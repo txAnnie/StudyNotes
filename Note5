@@ -1,0 +1,18 @@
+BerkeleyParser 
+
+
+
+
+* LEARNING NEW GRAMMARS
+
+To learn a grammar from trees that are contained in a single file use the -treebank option, 
+
+java -cp berkeleyParser.jar edu.berkeley.nlp.PCFGLA.GrammarTrainer -path <WSJ location> -out <grammar-file> -treebank SINGLEFILE
+
+
+*****（find the training set yourself,and "berkeleyParser.jar" means you choose one of the "BerkeleyParser-1.5.jar,BerkeleyParser-1.6.jar,BerkeleyParser-1.7.jar","-path"后接相对路径，"<grammar-file>"是训练的模型名）***** 
+
+
+To test the grammar that you have trained,
+
+java -cp berkeleyParser.jar edu.berkeley.nlp.PCFGLA.GrammarTester -path <WSJ location> -in <grammar-file>
