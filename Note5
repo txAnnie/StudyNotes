@@ -1,5 +1,22 @@
+
+
 BerkeleyParser 
 
+
+
+
+If you just want to use it ,you can choose the <grammar> which has already exists like "arb_sm5.gr,chn_sm5.gr,...",
+
+java -jar berkeleyParser.jar -gr <grammar>
+
+*****("berkeleyParser.jar" means you choose one of the "BerkeleyParser-1.5.jar,BerkeleyParser-1.6.jar,BerkeleyParser-1.7.jar")*****
+
+
+eg:
+annie@annie-Lenovo ~/Downloads/berkeleyparser $java -jar BerkeleyParser-1.7.jar -gr chn_sm5.gr
+输入：我 是 学生
+
+it will then shows:( (IP (NP (PN 我)) (VP (VC 是) (NP (NN 学生)))) )
 
 
 
@@ -16,3 +33,27 @@ java -cp berkeleyParser.jar edu.berkeley.nlp.PCFGLA.GrammarTrainer -path <WSJ lo
 To test the grammar that you have trained,
 
 java -cp berkeleyParser.jar edu.berkeley.nlp.PCFGLA.GrammarTester -path <WSJ location> -in <grammar-file>
+
+
+
+eg:
+Learning：
+
+I now have a "train.txt" in "/berkeleyparser/data" like :
+(ROOT (IP (NP (NP (NR#t (NR#y (NR#b 中) (NR#i 国)))) (ADJP (JJ#t (JJ#y (JJ#b 最) (JJ#i 大)))) (NP (NN#t (NN#y (NN#x (NN#b 氨) (NN#i 纶)) (NN#i 丝))) (NN#t (NN#x (NN#b 生) (NN#i 产))) (NN#t (NN#y (NN#b 基) (NN#i 地))))) (VP (PP (P#t (P#b 在)) (NP (NR#t (NR#y (NR#x (NR#b 连) (NR#i 云)) (NR#i 港))))) (VP (VV#t (VV#x (VV#b 建) (VV#i 成)))))))
+(ROOT (FRAG (NN#t (NN#y (NN#x (NN#b 新) (NN#i 华)) (NN#i 社))) (NR#t (NR#y (NR#b 南) (NR#i 京))) (NT#t (NT#y (NT#x (NT#b 十) (NT#i 二)) (NT#i 月))) (NT#t (NT#y (NT#b 四) (NT#i 日))) (NN#t (NN#b 电))))
+(ROOT (IP (NP (NP (CP (IP (VP (NP (NR#t (NR#y (NR#b 中) (NR#i 国)))) (ADVP (AD#t (AD#b 最))) (VP (VA#t (VA#b 大))))) (DEC#t (DEC#b 的))) (NP (NN#t (NN#y (NN#x (NN#b 氨) (NN#i 伦)) (NN#i 丝))) (NN#t (NN#x (NN#b 生) (NN#i 产))) (NN#t (NN#y (NN#b 基) (NN#i 地))))) (PRN (PU#t (PU#x (PU#b －) (PU#i －))) (NP (NP (NR#t (NR#x (NR#b 钟) (NR#i 山)))) (NP (NN#t (NN#x (NN#b 氨) (NN#i 伦)))) (ADJP (JJ#t (JJ#z (JJ#b 有) (JJ#i 限)))) (NP (NN#t (NN#y (NN#b 公) (NN#i 司))))))) (PU#t (PU#b ，)) (VP (NP (NT#t (NT#y (NT#b 日) (NT#i 前)))) (PP (P#t (P#b 在)) (NP (NP (NR#t (NR#y (NR#x (NR#b 连) (NR#i 云)) (NR#i 港)))) (NP (NN#t (NN#y (NN#x (NN#b 开) (NN#i 发)) (NN#i 区)))))) (VP (VV#t (VV#x (VV#b 建) (VV#i 成))) (CC#t (CC#b 并)) (VV#t (VV#z (VV#b 投) (VV#i 产))))) (PU#t (PU#b 。))))
+
+annie@annie-Lenovo ~/Downloads/berkeleyparser $ java -cp BerkeleyParser-1.7.jar edu.berkeley.nlp.PCFGLA.GrammarTrainer -path data/train.txt -out model -treebank SINGLEFIL
+*****(model 为训练好的模型)*****
+
+then,test:
+
+"data/test.in":
+联合国 发展 工业(要求事先分好词)
+
+annie@annie-Lenovo ~/Downloads/berkeleyparser $java -jar BerkeleyParser-1.7.jar -gr model -inputFile data/test.in -outputFile ./data/test.out
+
+you can see "( (FRAG (PU#t (PU#b 联合国)) (VV#t (VV#b 发展)) (PU#t (PU#b 工业))) )" in /data/test.out
+
+that's all!
