@@ -1,0 +1,16 @@
+NNCRF:NNSegmentation,NNPOSTagging,NNNamedEntity
+
+To run the NNSegmentation ,these files are necessary:LibN3L,mshadow,OpenBLAS ,find them on Github
+then downloads NNSegmentation,NNPOSTagging,NNNamedEntity ,and put all of them in the same folder,Let's begin
+
+
+first,get into the NNSegmention,
+annie@annie-Lenovo ~/workspace/NNSegmentation $ cmake .
+annie@annie-Lenovo ~/workspace/NNSegmentation $ make
+
+second ,go into the example in NNSegmentation,
+annie@annie-Lenovo ~/workspace/NNSegmentation $ chmod +x run.sh
+annie@annie-Lenovo ~/workspace/NNSegmentation $ ./run.sh
+
+
+If everything works as expected, a folder called pku.sample will appear in this directory. There will be three logs file in pku.sample directory. They are SparseCRFMMLabeler.log, SparseLSTMCRFMMLabeler.log and LSTMCRFMMLabeler.log. Each log file records the performance on the dev set and test set. 
