@@ -1,0 +1,32 @@
+Build C program:
+
+1.First, write a C program in Sublime like this:
+            /*testc.c*/
+            #include <stdio.h>  
+            int main()  
+            {  
+               printf("Hello Ubuntu!\n");  
+               return 0;  
+            }  
+2.Then,open terminal and type " gcc testc.c -o testc ",there'll be a testc in your folder ('testc.c' is your program's name and 'testc' is the name decisided by you for the Executable file).
+3.Finally,type "./testc " in the terminal,you'll see the result.
+(If you just type "gcc testc.c" in step 2,there will be a "a.out" by default,and then type "./a.out",it's be the same.)
+ps:选项 -c 用来告诉编译器编译源代码但不要执行链接，输出结果为对象文件。(If you use "gcc -c testc.c",there'll be a 'testc.o' in your folder,then "gcc testc.o -o testc",there'll be a executable file named 'testc' apperad,finally,type "./testc" and you'll see the result.)
+
+
+
+Build C++ program :
+It's the same with build C program,just replace 'gcc' with 'g++'.
+1.First, write a C++ program in Sublime like this:
+            /*test.cpp*/
+            # include <iostream>
+            # include <stdio.h>
+            using namespace std;
+            
+            int main(){
+                  cout<<"Hello world";
+            }
+2.Then,open terminal and type " g++ test.cpp -o test ",there'll be a test in your folder ('test.cpp' is your program's name and 'test' is the name decisided by you for the executable file).
+3.Finally,type "./test " in the terminal,you'll see the result.
+(If you just type "g++ test.cpp" in step 2,there will be a "a.out" by default,and then type "./a.out",it's be the same.)
+ps:选项 -c 用来告诉编译器编译源代码但不要执行链接，输出结果为对象文件。(If you use "g++ -c test.cpp",there'll be a 'test.o' in your folder,then "g++ test.o -o test",there'll be a executable file named 'test' apperad,finally,type "./test" and you'll see the result.)
