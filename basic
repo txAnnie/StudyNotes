@@ -1,7 +1,7 @@
 basic:
 (#SA:server address,LA：Local address,SP:server path)
 1.Connect to remote server:$ ssh name@SA  
-  Copy file to remote server:$ scp LA name@SA:SP
+  Copy file to remote server:$ scp LA name@SA:SP(/home/×××)
   Copy file to local:$ scp name@SA:SP LA 
 2.
 a)File size：$ du -sk filename
