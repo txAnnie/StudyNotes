@@ -1,8 +1,9 @@
 1.wc -l                   查看文本行数
 2.nvidia-smi              查看gpu
 3.split -l [行数] [文件名]     按行拆分文件
+4.native2ascii -reverse 1.txt 2.txt   转换编码为ascii
+5.egrep 'sth' file  在file文件中查找sth
 
-4.native2ascii -reverse 1.txt 2.txt
 
 
 
